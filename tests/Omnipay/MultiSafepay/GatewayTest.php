@@ -3,7 +3,7 @@
 namespace Omnipay\MultiSafepay;
 
 use Omnipay\Common\CreditCard;
-use Omnipay\GatewayTestCase;
+use Omnipay\Tests\GatewayTestCase;
 
 class GatewayTest extends GatewayTestCase
 {

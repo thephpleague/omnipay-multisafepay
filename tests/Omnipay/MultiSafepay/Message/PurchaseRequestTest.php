@@ -2,7 +2,7 @@
 
 namespace Omnipay\MultiSafepay\Message;
 
-use Omnipay\TestCase;
+use Omnipay\Tests\TestCase;
 use ReflectionMethod;
 
 class PurchaseRequestTest extends TestCase

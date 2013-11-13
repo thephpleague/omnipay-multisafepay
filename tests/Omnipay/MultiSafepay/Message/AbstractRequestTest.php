@@ -3,7 +3,7 @@
 namespace Omnipay\MultiSafepay\Message;
 
 use Mockery as m;
-use Omnipay\TestCase;
+use Omnipay\Tests\TestCase;
 use ReflectionMethod;
 
 class AbstractRequestTest extends TestCase

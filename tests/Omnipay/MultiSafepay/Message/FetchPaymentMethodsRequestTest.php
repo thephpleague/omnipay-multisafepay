@@ -2,7 +2,7 @@
 
 namespace Omnipay\MultiSafepay\Message;
 
-use Omnipay\TestCase;
+use Omnipay\Tests\TestCase;
 
 class FetchPaymentMethodsRequestTest extends TestCase
 {
