@@ -1,5 +1,5 @@
 {
-    "name": "omnipay/MultiSafepay",
+    "name": "omnipay/multisafepay",
     "type": "library",
     "description": "MultiSagepay driver for the Omnipay payment processing library",
     "keywords": [
