@@ -1,7 +1,7 @@
 {
     "name": "omnipay/multisafepay",
     "type": "library",
-    "description": "MultiSagepay driver for the Omnipay payment processing library",
+    "description": "MultiSafepay driver for the Omnipay payment processing library",
     "keywords": [
         "gateway",
         "merchant",
@@ -24,7 +24,7 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Omnipay\\MultiSagepay\\" : "src/" }
+        "psr-0": { "Omnipay\\MultiSafepay\\" : "src/" }
     },
     "require": {
         "omnipay/common": "2.*"
