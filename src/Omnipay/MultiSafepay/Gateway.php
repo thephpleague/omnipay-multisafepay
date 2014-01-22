@@ -70,7 +70,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $parameters
      *
-     * @return FetchPaymentMethodsRequest
+     * @return \Omnipay\MultiSafepay\Message\FetchPaymentMethodsRequest
      */
     public function fetchPaymentMethods(array $parameters = array())
     {
@@ -82,7 +82,7 @@ class Gateway extends AbstractGateway
      *
      * @param array $parameters
      *
-     * @return FetchIssuersRequest
+     * @return \Omnipay\MultiSafepay\Message\FetchIssuersRequest
      */
     public function fetchIssuers(array $parameters = array())
     {
@@ -90,7 +90,9 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $parameters
+     *
+     * @return \Omnipay\MultiSafepay\Message\PurchaseRequest
      */
     public function purchase(array $parameters = array())
     {
@@ -98,7 +100,9 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $parameters
+     *
+     * @return \Omnipay\MultiSafepay\Message\CompletePurchaseRequest
      */
     public function completePurchase(array $parameters = array())
     {

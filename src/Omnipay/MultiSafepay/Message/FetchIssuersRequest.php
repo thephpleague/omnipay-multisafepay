@@ -4,6 +4,9 @@ namespace Omnipay\MultiSafepay\Message;
 
 use SimpleXMLElement;
 
+/**
+ * @method \Omnipay\MultiSafepay\Message\FetchIssuersResponse send()
+ */
 class FetchIssuersRequest extends AbstractRequest
 {
     /**

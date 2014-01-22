@@ -4,6 +4,9 @@ namespace Omnipay\MultiSafepay\Message;
 
 use Omnipay\Common\Message\AbstractResponse as BaseAbstractResponse;
 
+/**
+ * @method mixed|\SimpleXMLElement getData()
+ */
 abstract class AbstractResponse extends BaseAbstractResponse
 {
     /**

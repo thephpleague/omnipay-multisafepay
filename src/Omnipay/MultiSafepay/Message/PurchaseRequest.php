@@ -5,6 +5,9 @@ namespace Omnipay\MultiSafepay\Message;
 use Omnipay\Common\CreditCard;
 use SimpleXMLElement;
 
+/**
+ * @method \Omnipay\MultiSafepay\Message\PurchaseResponse send()
+ */
 class PurchaseRequest extends AbstractRequest
 {
     public function getLanguage()

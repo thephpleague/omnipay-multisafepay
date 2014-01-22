@@ -4,6 +4,9 @@ namespace Omnipay\MultiSafepay\Message;
 
 use SimpleXMLElement;
 
+/**
+ * @method \Omnipay\MultiSafepay\Message\FetchPaymentMethodsResponse send()
+ */
 class FetchPaymentMethodsRequest extends AbstractRequest
 {
     public function getCountry()
