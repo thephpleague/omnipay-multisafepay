@@ -15,7 +15,7 @@ class AbstractRequestTest extends TestCase
 
     protected function setUp()
     {
-        $this->request = m::mock('\Omnipay\MultiSafepay\Message\AbstractRequest[getData,sendData]');
+        $this->request = m::mock('\Omnipay\MultiSafepay\Message\AbstractRequest')->makePartial();
     }
 
     /**
