@@ -11,7 +11,7 @@
         "pay",
         "payment"
     ],
-    "homepage": "https://github.com/omnipay/multisafepay",
+    "homepage": "https://github.com/thephpleague/omnipay-multisafepay",
     "license": "MIT",
     "authors": [
         {
@@ -20,7 +20,7 @@
         },
         {
             "name": "Omnipay Contributors",
-            "homepage": "https://github.com/omnipay/multisafepay/contributors"
+            "homepage": "https://github.com/thephpleague/omnipay-multisafepay/contributors"
         }
     ],
     "autoload": {
