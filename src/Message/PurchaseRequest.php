@@ -138,8 +138,16 @@ class PurchaseRequest extends AbstractRequest
         $transaction->addChild('var1', $this->getExtraData1());
         $transaction->addChild('var2', $this->getExtraData2());
         $transaction->addChild('var3', $this->getExtraData3());
-        $transaction->addChild('items', $this->getItems());
         $transaction->addChild('gateway', $this->getGateway());
+
+        if ($items = $this->getItems()) {
+            $itemsHtml = '<ul>';
+            foreach ($items as $item) {
+                $itemsHtml .= "<li>{$item['quantity']} x {$item['name']}</li>";
+            }
+            $itemsHtml .= '</ul>';
+            $transaction->addChild('items', $itemsHtml);
+        }
 
         if ('IDEAL' === $this->getGateway() && $this->getIssuer()) {
             $gatewayInfo = $data->addChild('gatewayinfo');

@@ -32,7 +32,10 @@ class PurchaseRequestTest extends TestCase
             'extraData2' => 'extra 2',
             'extraData3' => 'extra 3',
             'language' => 'a language',
-            'items' => 'the items',
+            'items' => array(
+                array('name' => 'item 1', 'quantity' => 1),
+                array('name' => 'item 2', 'quantity' => 2)
+            ),
             'clientIp' => '127.0.0.1',
             'googleAnalyticsCode' => 'analytics code',
             'card' => array(
@@ -165,8 +168,8 @@ class PurchaseRequestTest extends TestCase
     <var1>extra 1</var1>
     <var2>extra 2</var2>
     <var3>extra 3</var3>
-    <items>the items</items>
     <gateway>IDEAL</gateway>
+    <items>&lt;ul&gt;&lt;li&gt;1 x item 1&lt;/li&gt;&lt;li&gt;2 x item 2&lt;/li&gt;&lt;/ul&gt;</items>
   </transaction>
   <gatewayinfo>
     <issuerid>issuer</issuerid>
@@ -216,8 +219,8 @@ EOF;
     <var1>extra 1</var1>
     <var2>extra 2</var2>
     <var3>extra 3</var3>
-    <items>the items</items>
     <gateway>another</gateway>
+    <items>&lt;ul&gt;&lt;li&gt;1 x item 1&lt;/li&gt;&lt;li&gt;2 x item 2&lt;/li&gt;&lt;/ul&gt;</items>
   </transaction>
   <signature>ad447bab87b8597853432c891e341db1</signature>
 </redirecttransaction>
@@ -264,8 +267,8 @@ EOF;
     <var1>extra 1</var1>
     <var2>extra 2</var2>
     <var3>extra 3</var3>
-    <items>the items</items>
     <gateway>IDEAL</gateway>
+    <items>&lt;ul&gt;&lt;li&gt;1 x item 1&lt;/li&gt;&lt;li&gt;2 x item 2&lt;/li&gt;&lt;/ul&gt;</items>
   </transaction>
   <gatewayinfo>
     <issuerid>issuer</issuerid>
