@@ -146,7 +146,7 @@ class PurchaseRequest extends AbstractRequest
                 $itemsHtml .= "<li>{$item['quantity']} x {$item['name']}</li>";
             }
             $itemsHtml .= '</ul>';
-            $transaction->addChild('items', $itemsHtml);
+            $transaction->addChild('items', htmlspecialchars($itemsHtml));
         }
 
         if ('IDEAL' === $this->getGateway() && $this->getIssuer()) {
