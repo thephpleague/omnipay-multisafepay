@@ -1,30 +1,28 @@
-<?php
+<?php namespace Omnipay\MultiSafepay\Message;
 
-namespace Omnipay\MultiSafepay\Message;
+use Omnipay\Common\Message\FetchPaymentMethodsResponseInterface;
+use Omnipay\Common\PaymentMethod;
 
-class FetchPaymentMethodsResponse extends AbstractResponse
+class FetchPaymentMethodsResponse extends AbstractResponse implements FetchPaymentMethodsResponseInterface
 {
     /**
-     * {@inheritdoc}
-     */
-    public function isSuccessful()
-    {
-        return isset($this->data->gateways);
-    }
-
-    /**
-     * Return available payment methods as an associative array.
+     * Get the returned list of payment methods.
      *
-     * @return array
+     * These represent separate payment methods which the user must choose between.
+     *
+     * @return \Omnipay\Common\PaymentMethod[]
      */
     public function getPaymentMethods()
     {
-        $result = array();
+        $paymentMethods = array();
 
-        foreach ($this->data->gateways->gateway as $gateway) {
-            $result[(string) $gateway->id] = (string) $gateway->description;
+        foreach ($this->data['data'] as $method) {
+            $paymentMethods[] = new PaymentMethod(
+                $method['id'],
+                $method['description']
+            );
         }
 
-        return $result;
+        return $paymentMethods;
     }
 }

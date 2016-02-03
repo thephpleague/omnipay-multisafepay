@@ -1,10 +1,8 @@
 HTTP/1.1 200 OK
-Date: Thu, 11 Jul 2013 12:31:26 GMT
-Server: Apache/2.2.16 (Debian)
-X-Powered-By: PHP/5.3.3-7+squeeze14
+Date: Fri, 05 Feb 2016 10:25:42 GMT
+Server: Apache
 Vary: Accept-Encoding
-Content-Length: 459
-Content-Type: text/xml
+Content-Length: 52
+Content-Type: application/json; charset=UTF-8;
 
-<?xml version="1.0" encoding="UTF-8"?>
-<gateways result="ok"><gateways><gateway><id>VISA</id><description>Visa CreditCards</description></gateway><gateway><id>WALLET</id><description>MultiSafepay</description></gateway><gateway><id>IDEAL</id><description>iDEAL</description></gateway><gateway><id>BANKTRANS</id><description>Bank Transfer</description></gateway><gateway><id>MASTERCARD</id><description>MasterCard</description></gateway></gateways></gateways>
+{"success":true,"data":[{"id":"BANKTRANS","description":"Wire Transfer"},{"id":"MAESTRO","description":"Maestro"},{"id":"VISA","description":"Visa"},{"id":"WALLET","description":"MultiSafepay"},{"id":"IDEAL","description":"iDEAL"},{"id":"MASTERCARD","description":"MasterCard"}]}

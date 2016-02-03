@@ -1,8 +1,8 @@
 HTTP/1.1 200 OK
-Date: Thu, 11 Jul 2013 09:52:27 GMT
-Server: Apache/2.2.22 (FreeBSD) mod_ssl/2.2.22 OpenSSL/0.9.8q DAV/2
-Content-Length: 256
-Content-Type: text/xml
+Date: Fri, 05 Feb 2016 09:18:54 GMT
+Server: Apache
+Vary: Accept-Encoding
+Content-Length: 131
+Content-Type: application/json; charset=UTF-8;
 
-<?xml version="1.0" encoding="UTF-8"?>
-<redirecttransaction result="ok"><transaction><id>123456</id><payment_url>https://testpay.multisafepay.com/pay/?transaction=1373536347Hz4sFtg7WgMulO5q123456&amp;lang=</payment_url></transaction></redirecttransaction>
+{"success":true,"data":{"order_id":"TEST-TRANS-1","payment_url":"https:\/\/testpay.multisafepay.com\/pay\/?order_id=TEST-TRANS-1"}}

@@ -1,30 +1,26 @@
-<?php
+<?php namespace Omnipay\MultiSafepay\Message;
 
-namespace Omnipay\MultiSafepay\Message;
+use Omnipay\Common\Issuer;
+use Omnipay\Common\Message\FetchIssuersResponseInterface;
 
-class FetchIssuersResponse extends AbstractResponse
+class FetchIssuersResponse extends AbstractResponse implements FetchIssuersResponseInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function isSuccessful()
-    {
-        return isset($this->data->issuers);
-    }
-
     /**
      * Return available issuers as an associative array.
      *
-     * @return array
+     * @return \Omnipay\Common\Issuer[]
      */
     public function getIssuers()
     {
-        $result = array();
+        $issuers = array();
 
-        foreach ($this->data->issuers->issuer as $issuer) {
-            $result[(string) $issuer->code] = (string) $issuer->description;
+        foreach ($this->data['data'] as $issuer) {
+            $issuers[] = new Issuer(
+                $issuer['code'],
+                $issuer['description']
+            );
         }
 
-        return $result;
+        return $issuers;
     }
 }

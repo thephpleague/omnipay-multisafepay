@@ -1,13 +1,6 @@
-<?php
+<?php namespace Omnipay\MultiSafepay\Message;
 
-namespace Omnipay\MultiSafepay\Message;
-
-use SimpleXMLElement;
-
-/**
- * @method \Omnipay\MultiSafepay\Message\CompletePurchaseResponse send()
- */
-class CompletePurchaseRequest extends PurchaseRequest
+class CompletePurchaseRequest extends FetchTransactionRequest
 {
     /**
      * {@inheritdoc}
@@ -16,18 +9,9 @@ class CompletePurchaseRequest extends PurchaseRequest
     {
         $this->validate('transactionId');
 
-        $data = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><status/>');
-        $data->addAttribute('ua', $this->userAgent);
+        $transactionId = $this->getTransactionId();
 
-        $merchant = $data->addChild('merchant');
-        $merchant->addChild('account', $this->getAccountId());
-        $merchant->addChild('site_id', $this->getSiteId());
-        $merchant->addChild('site_secure_code', $this->getSiteCode());
-
-        $transaction = $data->addChild('transaction');
-        $transaction->addChild('id', $this->getTransactionId());
-
-        return $data;
+        return compact('transactionId');
     }
 
     /**
@@ -35,12 +19,16 @@ class CompletePurchaseRequest extends PurchaseRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->post(
-            $this->getEndpoint(),
-            $this->getHeaders(),
-            $data->asXML()
-        )->send();
+        $httpResponse = $this->sendRequest(
+            'get',
+            '/orders/' . $data['transactionId']
+        );
 
-        return $this->response = new CompletePurchaseResponse($this, $httpResponse->xml());
+        $this->response = new CompletePurchaseResponse(
+            $this,
+            $httpResponse->json()
+        );
+
+        return $this->response;
     }
 }

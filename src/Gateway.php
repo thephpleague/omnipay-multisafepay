@@ -1,67 +1,97 @@
-<?php
-
-namespace Omnipay\MultiSafepay;
+<?php namespace Omnipay\MultiSafepay;
 
 use Omnipay\Common\AbstractGateway;
+use Omnipay\MultiSafepay\Message\CompletePurchaseRequest;
 use Omnipay\MultiSafepay\Message\FetchIssuersRequest;
 use Omnipay\MultiSafepay\Message\FetchPaymentMethodsRequest;
+use Omnipay\MultiSafepay\Message\FetchTransactionRequest;
+use Omnipay\MultiSafepay\Message\PurchaseRequest;
+use Omnipay\MultiSafepay\Message\RefundRequest;
 
 /**
  * MultiSafepay gateway.
  *
- * @link https://www.multisafepay.com/downloads/handleidingen/Handleiding_connect(ENG).pdf
+ * @link https://www.multisafepay.com/documentation/doc/API-Reference/
  */
 class Gateway extends AbstractGateway
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'MultiSafepay';
     }
 
     /**
-     * {@inheritdoc}
+     * Get the gateway parameters
+     *
+     * @return array
      */
     public function getDefaultParameters()
     {
         return array(
-            'accountId' => '',
-            'siteId' => '',
-            'siteCode' => '',
+            'apiKey' => '',
+            'locale' => 'en',
             'testMode' => false,
         );
     }
 
-    public function getAccountId()
+    /**
+     * Get the locale.
+     *
+     * Optional ISO 639-1 language code which is used to specify a
+     * a language used to display gateway information and other
+     * messages in the responses.
+     *
+     * The default language is English.
+     *
+     * @return string
+     */
+    public function getLocale()
     {
-        return $this->getParameter('accountId');
+        return $this->getParameter('locale');
     }
 
-    public function setAccountId($value)
+    /**
+     * Set the locale.
+     *
+     * Optional ISO 639-1 language code which is used to specify a
+     * a language used to display gateway information and other
+     * messages in the responses.
+     *
+     * The default language is English.
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function setLocale($value)
     {
-        return $this->setParameter('accountId', $value);
+        return $this->setParameter('locale', $value);
     }
 
-    public function getSiteId()
+    /**
+     * Get the gateway API Key
+     *
+     * Authentication is by means of a single secret API key set as
+     * the apiKey parameter when creating the gateway object.
+     *
+     * @return string
+     */
+    public function getApiKey()
     {
-        return $this->getParameter('siteId');
+        return $this->getParameter('apiKey');
     }
 
-    public function setSiteId($value)
+    /**
+     * Set the gateway API Key
+     *
+     * Authentication is by means of a single secret API key set as
+     * the apiKey parameter when creating the gateway object.
+     *
+     * @param string $value
+     * @return Gateway provides a fluent interface.
+     */
+    public function setApiKey($value)
     {
-        return $this->setParameter('siteId', $value);
-    }
-
-    public function getSiteCode()
-    {
-        return $this->getParameter('siteCode');
-    }
-
-    public function setSiteCode($value)
-    {
-        return $this->setParameter('siteCode', $value);
+        return $this->setParameter('apiKey', $value);
     }
 
     /**
@@ -74,11 +104,11 @@ class Gateway extends AbstractGateway
      */
     public function fetchPaymentMethods(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\MultiSafepay\Message\FetchPaymentMethodsRequest', $parameters);
+        return $this->createRequest(FetchPaymentMethodsRequest::class, $parameters);
     }
 
     /**
-     * Retrieve iDEAL issuers.
+     * Retrieve issuers for gateway.
      *
      * @param array $parameters
      *
@@ -86,7 +116,29 @@ class Gateway extends AbstractGateway
      */
     public function fetchIssuers(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\MultiSafepay\Message\FetchIssuersRequest', $parameters);
+        return $this->createRequest(FetchIssuersRequest::class, $parameters);
+    }
+
+    /**
+     * Retrieve transaction by the given identifier.
+     *
+     * @param array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function fetchTransaction(array $parameters = array())
+    {
+        return $this->createRequest(FetchTransactionRequest::class, $parameters);
+    }
+
+    /**
+     * Create a refund.
+     *
+     * @param array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function refund(array $parameters = array())
+    {
+        return $this->createRequest(RefundRequest::class, $parameters);
     }
 
     /**
@@ -96,7 +148,7 @@ class Gateway extends AbstractGateway
      */
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\MultiSafepay\Message\PurchaseRequest', $parameters);
+        return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
     /**
@@ -106,6 +158,6 @@ class Gateway extends AbstractGateway
      */
     public function completePurchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\MultiSafepay\Message\CompletePurchaseRequest', $parameters);
+        return $this->createRequest(CompletePurchaseRequest::class, $parameters);
     }
 }

@@ -1,32 +1,32 @@
 <?php namespace Omnipay\MultiSafepay\Message;
 
-class FetchIssuersRequest extends AbstractRequest
+class FetchTransactionRequest extends AbstractRequest
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function getData()
     {
         parent::getData();
 
-        $this->validate('paymentMethod');
+        $this->validate('transactionId');
 
-        $paymentMethod = $this->getPaymentMethod();
+        $transactionId = $this->getTransactionId();
 
-        return compact('paymentMethod');
+        return compact('transactionId');
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function sendData($data)
     {
         $httpResponse = $this->sendRequest(
-            'GET',
-            '/issuers/' . $data['paymentMethod']
+            'get',
+            '/orders/' . $data['transactionId']
         );
 
-        $this->response = new FetchIssuersResponse(
+        $this->response = new FetchTransactionResponse(
             $this,
             $httpResponse->json()
         );

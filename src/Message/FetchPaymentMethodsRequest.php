@@ -1,19 +1,19 @@
-<?php
+<?php namespace Omnipay\MultiSafepay\Message;
 
-namespace Omnipay\MultiSafepay\Message;
-
-use SimpleXMLElement;
-
-/**
- * @method \Omnipay\MultiSafepay\Message\FetchPaymentMethodsResponse send()
- */
 class FetchPaymentMethodsRequest extends AbstractRequest
 {
+    /**
+     * @return string|null
+     */
     public function getCountry()
     {
         return $this->getParameter('country');
     }
 
+    /**
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setCountry($value)
     {
         return $this->setParameter('country', $value);
@@ -24,18 +24,15 @@ class FetchPaymentMethodsRequest extends AbstractRequest
      */
     public function getData()
     {
-        $data = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><gateways/>');
-        $data->addAttribute('ua', $this->userAgent);
+        parent::getData();
 
-        $merchant = $data->addChild('merchant');
-        $merchant->addChild('account', $this->getAccountId());
-        $merchant->addChild('site_id', $this->getSiteId());
-        $merchant->addChild('site_secure_code', $this->getSiteCode());
+        $data = array(
+            'amount'   => $this->getAmountInteger(),
+            'country'  => $this->getCountry(),
+            'currency' => $this->getCurrency(),
+        );
 
-        $customer = $data->addChild('customer');
-        $customer->addChild('country', $this->getCountry());
-
-        return $data;
+        return array_filter($data);
     }
 
     /**
@@ -43,12 +40,13 @@ class FetchPaymentMethodsRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->post(
-            $this->getEndpoint(),
-            $this->getHeaders(),
-            $data->asXML()
-        )->send();
+        $httpResponse = $this->sendRequest('GET', '/gateways', $data);
 
-        return $this->response = new FetchPaymentMethodsResponse($this, $httpResponse->xml());
+        $this->response = new FetchPaymentMethodsResponse(
+            $this,
+            $httpResponse->json()
+        );
+
+        return $this->response;
     }
 }
