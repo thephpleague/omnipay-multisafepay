@@ -1,12 +1,6 @@
 <?php namespace Omnipay\MultiSafepay;
 
 use Omnipay\Common\AbstractGateway;
-use Omnipay\MultiSafepay\Message\CompletePurchaseRequest;
-use Omnipay\MultiSafepay\Message\FetchIssuersRequest;
-use Omnipay\MultiSafepay\Message\FetchPaymentMethodsRequest;
-use Omnipay\MultiSafepay\Message\FetchTransactionRequest;
-use Omnipay\MultiSafepay\Message\PurchaseRequest;
-use Omnipay\MultiSafepay\Message\RefundRequest;
 
 /**
  * MultiSafepay gateway.
@@ -104,7 +98,7 @@ class Gateway extends AbstractGateway
      */
     public function fetchPaymentMethods(array $parameters = array())
     {
-        return $this->createRequest(FetchPaymentMethodsRequest::class, $parameters);
+        return $this->createRequest('Omnipay\MultiSafepay\Message\FetchPaymentMethodsRequest', $parameters);
     }
 
     /**
@@ -116,7 +110,7 @@ class Gateway extends AbstractGateway
      */
     public function fetchIssuers(array $parameters = array())
     {
-        return $this->createRequest(FetchIssuersRequest::class, $parameters);
+        return $this->createRequest('Omnipay\MultiSafepay\Message\FetchIssuersRequest', $parameters);
     }
 
     /**
@@ -127,7 +121,7 @@ class Gateway extends AbstractGateway
      */
     public function fetchTransaction(array $parameters = array())
     {
-        return $this->createRequest(FetchTransactionRequest::class, $parameters);
+        return $this->createRequest('Omnipay\MultiSafepay\Message\FetchTransactionRequest', $parameters);
     }
 
     /**
@@ -138,7 +132,7 @@ class Gateway extends AbstractGateway
      */
     public function refund(array $parameters = array())
     {
-        return $this->createRequest(RefundRequest::class, $parameters);
+        return $this->createRequest('Omnipay\MultiSafepay\Message\RefundRequest', $parameters);
     }
 
     /**
@@ -148,7 +142,7 @@ class Gateway extends AbstractGateway
      */
     public function purchase(array $parameters = array())
     {
-        return $this->createRequest(PurchaseRequest::class, $parameters);
+        return $this->createRequest('Omnipay\MultiSafepay\Message\PurchaseRequest', $parameters);
     }
 
     /**
@@ -158,6 +152,6 @@ class Gateway extends AbstractGateway
      */
     public function completePurchase(array $parameters = array())
     {
-        return $this->createRequest(CompletePurchaseRequest::class, $parameters);
+        return $this->createRequest('Omnipay\MultiSafepay\Message\CompletePurchaseRequest', $parameters);
     }
 }

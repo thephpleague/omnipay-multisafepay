@@ -1,9 +1,5 @@
 <?php namespace Omnipay\MultiSafepay;
 
-use Omnipay\MultiSafepay\Message\CompletePurchaseRequest;
-use Omnipay\MultiSafepay\Message\FetchIssuersRequest;
-use Omnipay\MultiSafepay\Message\FetchPaymentMethodsRequest;
-use Omnipay\MultiSafepay\Message\PurchaseRequest;
 use Omnipay\Tests\GatewayTestCase;
 
 class GatewayTest extends GatewayTestCase
@@ -31,7 +27,7 @@ class GatewayTest extends GatewayTestCase
             array('country' => 'NL')
         );
 
-        $this->assertInstanceOf(FetchPaymentMethodsRequest::class, $request);
+        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\FetchPaymentMethodsRequest', $request);
         $this->assertEquals('NL', $request->getCountry());
     }
 
@@ -39,14 +35,14 @@ class GatewayTest extends GatewayTestCase
     {
         $request = $this->gateway->fetchIssuers();
 
-        $this->assertInstanceOf(FetchIssuersRequest::class, $request);
+        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\FetchIssuersRequest', $request);
     }
 
     public function testPurchaseRequest()
     {
         $request = $this->gateway->purchase(array('amount' => 10.00));
 
-        $this->assertInstanceOf(PurchaseRequest::class, $request);
+        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\PurchaseRequest', $request);
         $this->assertEquals($request->getAmount(), 10.00);
     }
 
@@ -54,7 +50,7 @@ class GatewayTest extends GatewayTestCase
     {
         $request = $this->gateway->completePurchase(array('amount' => 10.00));
 
-        $this->assertInstanceOf(CompletePurchaseRequest::class, $request);
+        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\CompletePurchaseRequest', $request);
         $this->assertEquals($request->getAmount(), 10.00);
     }
 }
