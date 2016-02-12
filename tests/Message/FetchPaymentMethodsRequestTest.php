@@ -1,6 +1,5 @@
 <?php namespace Omnipay\MultiSafepay\Message;
 
-use Omnipay\Common\PaymentMethod;
 use Omnipay\Tests\TestCase;
 
 class FetchPaymentMethodsRequestTest extends TestCase
@@ -38,6 +37,6 @@ class FetchPaymentMethodsRequestTest extends TestCase
         $this->assertNull($response->getTransactionReference());
 
         $this->assertInternalType('array', $paymentMethods);
-        $this->assertContainsOnlyInstancesOf(PaymentMethod::class, $paymentMethods);
+        $this->assertContainsOnlyInstancesOf('Omnipay\Common\PaymentMethod', $paymentMethods);
     }
 }

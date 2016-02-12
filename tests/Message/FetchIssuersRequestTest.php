@@ -1,6 +1,5 @@
 <?php namespace Omnipay\MultiSafepay\Message;
 
-use Omnipay\Common\Issuer;
 use Omnipay\Tests\TestCase;
 
 class FetchIssuersRequestTest extends TestCase
@@ -33,9 +32,9 @@ class FetchIssuersRequestTest extends TestCase
 
         $issuers = $response->getIssuers();
 
-        $this->assertContainsOnlyInstancesOf(Issuer::class, $issuers);
+        $this->assertContainsOnlyInstancesOf('Omnipay\Common\Issuer', $issuers);
         $this->assertFalse($response->isRedirect());
-        $this->assertInstanceOf(FetchIssuersResponse::class, $response);
+        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\FetchIssuersResponse', $response);
         $this->assertInternalType('array', $issuers);
 
         $this->assertNull($response->getTransactionReference());
@@ -53,6 +52,6 @@ class FetchIssuersRequestTest extends TestCase
         $this->assertFalse($response->isRedirect());
 
         $this->assertFalse($response->isSuccessful());
-        $this->assertInstanceOf(FetchIssuersResponse::class, $response);
+        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\FetchIssuersResponse', $response);
     }
 }
