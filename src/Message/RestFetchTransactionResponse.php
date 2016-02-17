@@ -1,6 +1,27 @@
-<?php namespace Omnipay\MultiSafepay\Message;
+<?php
+/**
+ * MultiSafepay Rest Api Fetch Transaction Response.
+ */
+namespace Omnipay\MultiSafepay\Message;
 
-class FetchTransactionResponse extends AbstractResponse
+/**
+ * MultiSafepay Rest Api Fetch Transaction Response.
+ *
+ * To get information about a previous processed transaction, MultiSafepay provides
+ * the /orders/{order_id} resource. This resource can be used to query the details
+ * about a specific transaction.
+ *
+ * <code>
+ *   // Fetch the transaction.
+ *   $transaction = $gateway->fetchTransaction();
+ *   $transaction->setTransactionId($transactionId);
+ *   $response = $transaction->send();
+ *   print_r($response->getData());
+ * </code>
+ *
+ * @link https://www.multisafepay.com/documentation/doc/API-Reference
+ */
+class RestFetchTransactionResponse extends RestAbstractResponse
 {
     /**
      * Is the payment created, but uncompleted?

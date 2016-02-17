@@ -1,9 +1,23 @@
-<?php namespace Omnipay\MultiSafepay\Message;
+<?php
+/**
+ * MultiSafepay XML Api Fetch Payment Methods Request.
+ */
+namespace Omnipay\MultiSafepay\Message;
 
+use SimpleXMLElement;
+
+/**
+ * MultiSafepay XML Api Fetch Payment Methods Request.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
+ */
 class FetchPaymentMethodsRequest extends AbstractRequest
 {
     /**
-     * @return string|null
+     * Get the country.
+     *
+     * @return mixed
      */
     public function getCountry()
     {
@@ -11,6 +25,8 @@ class FetchPaymentMethodsRequest extends AbstractRequest
     }
 
     /**
+     * Set the country.
+     *
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
@@ -24,15 +40,18 @@ class FetchPaymentMethodsRequest extends AbstractRequest
      */
     public function getData()
     {
-        parent::getData();
+        $data = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><gateways/>');
+        $data->addAttribute('ua', $this->userAgent);
 
-        $data = array(
-            'amount'   => $this->getAmountInteger(),
-            'country'  => $this->getCountry(),
-            'currency' => $this->getCurrency(),
-        );
+        $merchant = $data->addChild('merchant');
+        $merchant->addChild('account', $this->getAccountId());
+        $merchant->addChild('site_id', $this->getSiteId());
+        $merchant->addChild('site_secure_code', $this->getSiteCode());
 
-        return array_filter($data);
+        $customer = $data->addChild('customer');
+        $customer->addChild('country', $this->getCountry());
+
+        return $data;
     }
 
     /**
@@ -40,11 +59,15 @@ class FetchPaymentMethodsRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->sendRequest('GET', '/gateways', $data);
+        $httpResponse = $this->httpClient->post(
+            $this->getEndpoint(),
+            $this->getHeaders(),
+            $data->asXML()
+        )->send();
 
         $this->response = new FetchPaymentMethodsResponse(
             $this,
-            $httpResponse->json()
+            $httpResponse->xml()
         );
 
         return $this->response;

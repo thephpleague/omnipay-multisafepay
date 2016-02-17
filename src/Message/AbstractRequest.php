@@ -1,9 +1,29 @@
-<?php namespace Omnipay\MultiSafepay\Message;
+<?php
+/**
+ * MultiSafepay Abstract XML Api Request.
+ */
 
-use Guzzle\Common\Event;
+namespace Omnipay\MultiSafepay\Message;
 
-abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
+use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
+
+/**
+ * Multisafepay Abstract XML Api Request.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
+ */
+abstract class AbstractRequest extends BaseAbstractRequest
 {
+    /**
+     * User Agent.
+     *
+     * This user agent will be sent with each API request.
+     *
+     * @var string
+     */
+    protected $userAgent = 'Omnipay';
+
     /**
      * Live API endpoint.
      *
@@ -11,7 +31,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      *
      * @var string
      */
-    protected $liveEndpoint = 'https://api.multisafepay.com/v1/json';
+    protected $liveEndpoint = 'https://api.multisafepay.com/ewx/';
 
     /**
      * Test API endpoint.
@@ -20,70 +40,73 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
      *
      * @var string
      */
-    protected $testEndpoint = 'https://testapi.multisafepay.com/v1/json';
+    protected $testEndpoint = 'https://testapi.multisafepay.com/ewx/';
 
     /**
-     * Get the locale.
+     * Get the account identifier.
      *
-     * Optional ISO 639-1 language code which is used to specify a
-     * a language used to display gateway information and other
-     * messages in the responses.
-     *
-     * The default language is English.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getLocale()
+    public function getAccountId()
     {
-        return $this->getParameter('locale');
+        return $this->getParameter('accountId');
     }
 
     /**
-     * Set the locale.
-     *
-     * Optional ISO 639-1 language code which is used to specify a
-     * a language used to display gateway information and other
-     * messages in the responses.
-     *
-     * The default language is English.
+     * Set the account identifier.
      *
      * @param $value
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return BaseAbstractRequest
      */
-    public function setLocale($value)
+    public function setAccountId($value)
     {
-        return $this->setParameter('locale', $value);
+        return $this->setParameter('accountId', $value);
     }
 
     /**
-     * Get the gateway API Key
+     * Get the site identifier.
      *
-     * Authentication is by means of a single secret API key set as
-     * the apiKey parameter when creating the gateway object.
-     *
-     * @return string
+     * @return mixed
      */
-    public function getApiKey()
+    public function getSiteId()
     {
-        return $this->getParameter('apiKey');
+        return $this->getParameter('siteId');
     }
 
     /**
-     * Set the gateway API Key
-     *
-     * Authentication is by means of a single secret API key set as
-     * the apiKey parameter when creating the gateway object.
+     * Set the site identifier.
      *
      * @param $value
-     * @return \Omnipay\Common\Message\AbstractRequest
+     * @return BaseAbstractRequest
      */
-    public function setApiKey($value)
+    public function setSiteId($value)
     {
-        return $this->setParameter('apiKey', $value);
+        return $this->setParameter('siteId', $value);
     }
 
     /**
-     * Get endpoint.
+     * Get the site code.
+     *
+     * @return mixed
+     */
+    public function getSiteCode()
+    {
+        return $this->getParameter('siteCode');
+    }
+
+    /**
+     * Set the site code.
+     *
+     * @param $value
+     * @return BaseAbstractRequest
+     */
+    public function setSiteCode($value)
+    {
+        return $this->setParameter('siteCode', $value);
+    }
+
+    /**
+     * Get the API endpoint.
      *
      * @return string
      */
@@ -97,48 +120,14 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
-     * {@inheritdoc}
+     * Get headers.
+     *
+     * @return array
      */
-    public function getData()
+    protected function getHeaders()
     {
-        $this->validate('apiKey');
-    }
-
-    /**
-     * @param $method
-     * @param $endpoint
-     * @param null $query
-     * @param null $data
-     * @return \Guzzle\Http\Message\Response
-     */
-    protected function sendRequest($method, $endpoint, $query = null, $data = null)
-    {
-        $this->httpClient->getEventDispatcher()->addListener('request.error', function (Event $event) {
-            /**
-             * @var \Guzzle\Http\Message\Response $response
-             */
-            $response = $event['response'];
-            if ($response->isError()) {
-                $event->stopPropagation();
-            }
-        });
-
-        $httpRequest = $this->httpClient->createRequest(
-            $method,
-            $this->getEndpoint() . $endpoint,
-            array(
-                'api_key' => $this->getApiKey(),
-            ),
-            $data
+        return array(
+            'User-Agent' => $this->userAgent,
         );
-
-        // Add query parameters
-        if (is_array($query) && ! empty($query)) {
-            foreach ($query as $itemKey => $itemValue) {
-                $httpRequest->getQuery()->add($itemKey, $itemValue);
-            }
-        }
-
-        return $httpRequest->send();
     }
 }

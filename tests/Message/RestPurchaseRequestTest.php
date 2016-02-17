@@ -2,7 +2,7 @@
 
 use Omnipay\Tests\TestCase;
 
-class PurchaseRequestTest extends TestCase
+class RestPurchaseRequestTest extends TestCase
 {
     /**
      * @var PurchaseRequest
@@ -11,7 +11,7 @@ class PurchaseRequestTest extends TestCase
 
     protected function setUp()
     {
-        $this->request = new PurchaseRequest(
+        $this->request = new RestPurchaseRequest(
             $this->getHttpClient(),
             $this->getHttpRequest()
         );
@@ -42,7 +42,7 @@ class PurchaseRequestTest extends TestCase
 
     public function testSendSuccess()
     {
-        $this->setMockHttpResponse('PurchaseSuccess.txt');
+        $this->setMockHttpResponse('RestPurchaseSuccess.txt');
 
         $response = $this->request->send();
 
@@ -59,7 +59,7 @@ class PurchaseRequestTest extends TestCase
 
     public function testInvalidAmount()
     {
-        $this->setMockHttpResponse('PurchaseInvalidAmount.txt');
+        $this->setMockHttpResponse('RestPurchaseInvalidAmount.txt');
 
         $response = $this->request->send();
 

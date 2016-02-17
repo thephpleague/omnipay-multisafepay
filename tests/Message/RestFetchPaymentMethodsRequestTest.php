@@ -2,7 +2,7 @@
 
 use Omnipay\Tests\TestCase;
 
-class FetchPaymentMethodsRequestTest extends TestCase
+class RestFetchPaymentMethodsRequestTest extends TestCase
 {
     /**
      * @var FetchPaymentMethodsRequest
@@ -11,7 +11,7 @@ class FetchPaymentMethodsRequestTest extends TestCase
 
     protected function setUp()
     {
-        $this->request = new FetchPaymentMethodsRequest(
+        $this->request = new RestFetchPaymentMethodsRequest(
             $this->getHttpClient(),
             $this->getHttpRequest()
         );
@@ -26,7 +26,7 @@ class FetchPaymentMethodsRequestTest extends TestCase
 
     public function testSendSuccess()
     {
-        $this->setMockHttpResponse('FetchPaymentMethodsSuccess.txt');
+        $this->setMockHttpResponse('RestFetchPaymentMethodsSuccess.txt');
 
         $response = $this->request->send();
 

@@ -2,7 +2,7 @@
 
 use Omnipay\Tests\TestCase;
 
-class FetchIssuersRequestTest extends TestCase
+class RestFetchIssuersRequestTest extends TestCase
 {
     /**
      * @var FetchIssuersRequest
@@ -11,7 +11,7 @@ class FetchIssuersRequestTest extends TestCase
 
     protected function setUp()
     {
-        $this->request = new FetchIssuersRequest(
+        $this->request = new RestFetchIssuersRequest(
             $this->getHttpClient(),
             $this->getHttpRequest()
         );
@@ -26,7 +26,7 @@ class FetchIssuersRequestTest extends TestCase
 
     public function testSendSuccess()
     {
-        $this->setMockHttpResponse('FetchIssuersSuccess.txt');
+        $this->setMockHttpResponse('RestFetchIssuersSuccess.txt');
 
         $response = $this->request->send();
 
@@ -34,7 +34,7 @@ class FetchIssuersRequestTest extends TestCase
 
         $this->assertContainsOnlyInstancesOf('Omnipay\Common\Issuer', $issuers);
         $this->assertFalse($response->isRedirect());
-        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\FetchIssuersResponse', $response);
+        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\RestFetchIssuersResponse', $response);
         $this->assertInternalType('array', $issuers);
 
         $this->assertNull($response->getTransactionReference());
@@ -43,7 +43,7 @@ class FetchIssuersRequestTest extends TestCase
 
     public function testIssuerNotFound()
     {
-        $this->setMockHttpResponse('FetchIssuersFailure.txt');
+        $this->setMockHttpResponse('RestFetchIssuersFailure.txt');
 
         $response = $this->request->send();
 
@@ -52,6 +52,6 @@ class FetchIssuersRequestTest extends TestCase
         $this->assertFalse($response->isRedirect());
 
         $this->assertFalse($response->isSuccessful());
-        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\FetchIssuersResponse', $response);
+        $this->assertInstanceOf('Omnipay\MultiSafepay\Message\RestFetchIssuersResponse', $response);
     }
 }

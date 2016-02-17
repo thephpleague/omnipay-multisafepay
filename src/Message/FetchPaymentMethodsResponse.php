@@ -1,28 +1,39 @@
-<?php namespace Omnipay\MultiSafepay\Message;
+<?php
+/**
+ * MultiSafepay XML Api Fetch Payment Methods Response.
+ */
 
-use Omnipay\Common\Message\FetchPaymentMethodsResponseInterface;
-use Omnipay\Common\PaymentMethod;
+namespace Omnipay\MultiSafepay\Message;
 
-class FetchPaymentMethodsResponse extends AbstractResponse implements FetchPaymentMethodsResponseInterface
+/**
+ * MultiSafepat XML Api Fetch Payment Methods Response.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
+ */
+class FetchPaymentMethodsResponse extends AbstractResponse
 {
     /**
-     * Get the returned list of payment methods.
+     * {@inheritdoc}
+     */
+    public function isSuccessful()
+    {
+        return isset($this->data->gateways);
+    }
+
+    /**
+     * Return available payment methods as an associative array.
      *
-     * These represent separate payment methods which the user must choose between.
-     *
-     * @return \Omnipay\Common\PaymentMethod[]
+     * @return array
      */
     public function getPaymentMethods()
     {
-        $paymentMethods = array();
+        $result = array();
 
-        foreach ($this->data['data'] as $method) {
-            $paymentMethods[] = new PaymentMethod(
-                $method['id'],
-                $method['description']
-            );
+        foreach ($this->data->gateways->gateway as $gateway) {
+            $result[(string) $gateway->id] = (string) $gateway->description;
         }
 
-        return $paymentMethods;
+        return $result;
     }
 }
