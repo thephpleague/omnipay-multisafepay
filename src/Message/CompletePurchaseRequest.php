@@ -1,11 +1,17 @@
 <?php
+/**
+ * MultiSafepay XML Api Complete Purchase Request.
+ */
 
 namespace Omnipay\MultiSafepay\Message;
 
 use SimpleXMLElement;
 
 /**
- * @method \Omnipay\MultiSafepay\Message\CompletePurchaseResponse send()
+ * MultiSafepay XML Api Complete Purchase Request.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
  */
 class CompletePurchaseRequest extends PurchaseRequest
 {
@@ -41,6 +47,11 @@ class CompletePurchaseRequest extends PurchaseRequest
             $data->asXML()
         )->send();
 
-        return $this->response = new CompletePurchaseResponse($this, $httpResponse->xml());
+        $this->response = new CompletePurchaseResponse(
+            $this,
+            $httpResponse->xml()
+        );
+
+        return $this->response;
     }
 }

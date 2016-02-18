@@ -31,7 +31,8 @@ And run composer to update your dependencies:
 
 The following gateways are provided by this package:
 
-* MultiSafepay
+* MultiSafepay_Rest
+* MultiSafepay_Xml (Deprecated)
 
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay)
 repository.

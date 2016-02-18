@@ -1,19 +1,35 @@
 <?php
-
+/**
+ * MultiSafepay XML Api Fetch Payment Methods Request.
+ */
 namespace Omnipay\MultiSafepay\Message;
 
 use SimpleXMLElement;
 
 /**
- * @method \Omnipay\MultiSafepay\Message\FetchPaymentMethodsResponse send()
+ * MultiSafepay XML Api Fetch Payment Methods Request.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
  */
 class FetchPaymentMethodsRequest extends AbstractRequest
 {
+    /**
+     * Get the country.
+     *
+     * @return mixed
+     */
     public function getCountry()
     {
         return $this->getParameter('country');
     }
 
+    /**
+     * Set the country.
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setCountry($value)
     {
         return $this->setParameter('country', $value);
@@ -49,6 +65,11 @@ class FetchPaymentMethodsRequest extends AbstractRequest
             $data->asXML()
         )->send();
 
-        return $this->response = new FetchPaymentMethodsResponse($this, $httpResponse->xml());
+        $this->response = new FetchPaymentMethodsResponse(
+            $this,
+            $httpResponse->xml()
+        );
+
+        return $this->response;
     }
 }

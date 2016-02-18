@@ -1,9 +1,18 @@
 <?php
+/**
+ * MultiSafepay XML Api Purchase Response.
+ */
 
 namespace Omnipay\MultiSafepay\Message;
 
 use Omnipay\Common\Message\RedirectResponseInterface;
 
+/**
+ * MultiSafepay XML Api Purchase Response.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
+ */
 class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface
 {
     /**
@@ -11,7 +20,9 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      */
     public function getTransactionReference()
     {
-        return isset($this->data->transaction->id) ? (string) $this->data->transaction->id : null;
+        if (isset($this->data->transaction->id)) {
+            return (string)$this->data->transaction->id;
+        }
     }
 
     /**
@@ -27,7 +38,13 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      */
     public function isRedirect()
     {
-        return isset($this->data->transaction->payment_url) || isset($this->data->gatewayinfo->redirecturl);
+        if (isset($this->data->transaction->payment_url) ||
+            isset($this->data->gatewayinfo->redirecturl)
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -36,8 +53,10 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     public function getRedirectUrl()
     {
         if (isset($this->data->gatewayinfo->redirecturl)) {
-            return (string) $this->data->gatewayinfo->redirecturl;
-        } elseif (isset($this->data->transaction->payment_url)) {
+            return (string)$this->data->gatewayinfo->redirecturl;
+        }
+
+        if (isset($this->data->transaction->payment_url)) {
             return (string) $this->data->transaction->payment_url;
         }
 

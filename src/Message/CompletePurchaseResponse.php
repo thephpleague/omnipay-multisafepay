@@ -1,7 +1,16 @@
 <?php
+/**
+ * MultiSafepay XML Api Complete Purchase Response.
+ */
 
 namespace Omnipay\MultiSafepay\Message;
 
+/**
+ * MultiSafepay XML Api Complete Purchase Response.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
+ */
 class CompletePurchaseResponse extends AbstractResponse
 {
     /**
@@ -9,7 +18,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isSuccessful()
     {
-        return isset($this->data->ewallet->status) && 'completed' === (string) $this->data->ewallet->status;
+        return $this->getPaymentStatus() === 'completed';
     }
 
     /**
@@ -17,7 +26,9 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function getTransactionReference()
     {
-        return isset($this->data->transaction->id) ? (string) $this->data->transaction->id : null;
+        if (isset($this->data->transaction->id)) {
+            return (string) $this->data->transaction->id;
+        }
     }
 
     /**
@@ -27,7 +38,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isInitialized()
     {
-        return isset($this->data->ewallet->status) && 'initialized' === (string) $this->data->ewallet->status;
+        return $this->getPaymentStatus() === 'initialized';
     }
 
     /**
@@ -37,7 +48,8 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isUncleared()
     {
-        return isset($this->data->ewallet->status) && 'uncleared' === (string) $this->data->ewallet->status;
+        return $this->getPaymentStatus() === 'uncleared';
+
     }
 
     /**
@@ -47,7 +59,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isCanceled()
     {
-        return isset($this->data->ewallet->status) && 'canceled' === (string) $this->data->ewallet->status;
+        return $this->getPaymentStatus() === 'canceled';
     }
 
     /**
@@ -57,7 +69,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isRejected()
     {
-        return isset($this->data->ewallet->status) && 'declined' === (string) $this->data->ewallet->status;
+        return $this->getPaymentStatus() === 'declined';
     }
 
     /**
@@ -67,7 +79,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isRefunded()
     {
-        return isset($this->data->ewallet->status) && 'refunded' === (string) $this->data->ewallet->status;
+        return $this->getPaymentStatus() === 'refunded';
     }
 
     /**
@@ -77,7 +89,7 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function isExpired()
     {
-        return isset($this->data->ewallet->status) && 'expired' === (string) $this->data->ewallet->status;
+        return $this->getPaymentStatus() === 'expired';
     }
 
     /**
@@ -87,6 +99,8 @@ class CompletePurchaseResponse extends AbstractResponse
      */
     public function getPaymentStatus()
     {
-        return isset($this->data->ewallet->status) ? (string) $this->data->ewallet->status : null;
+        if (isset($this->data->ewallet->status)) {
+            return (string)$this->data->ewallet->status;
+        }
     }
 }

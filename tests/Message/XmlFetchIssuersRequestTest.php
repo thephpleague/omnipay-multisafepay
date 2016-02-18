@@ -4,40 +4,43 @@ namespace Omnipay\MultiSafepay\Message;
 
 use Omnipay\Tests\TestCase;
 
-class FetchPaymentMethodsRequestTest extends TestCase
+class XmlFetchIssuersRequestTest extends TestCase
 {
     /**
-     * @var FetchPaymentMethodsRequest
+     * @var FetchIssuersRequest
      */
     private $request;
 
     protected function setUp()
     {
-        $this->request = new FetchPaymentMethodsRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->request = new FetchIssuersRequest(
+            $this->getHttpClient(),
+            $this->getHttpRequest()
+        );
+
         $this->request->initialize(array(
             'accountId' => '111111',
             'siteId' => '222222',
             'siteCode' => '333333',
-            'country' => 'NL',
         ));
     }
 
     /**
-     * @dataProvider paymentMethodsProvider
+     * @dataProvider issuersProvider
      */
     public function testSendSuccess($expected)
     {
-        $this->setMockHttpResponse('FetchPaymentMethodsSuccess.txt');
+        $this->setMockHttpResponse('XmlFetchIssuersSuccess.txt');
 
         $response = $this->request->send();
 
         $this->assertTrue($response->isSuccessful());
-        $this->assertEquals($expected, $response->getPaymentMethods());
+        $this->assertEquals($expected, $response->getIssuers());
     }
 
     public function testSendFailure()
     {
-        $this->setMockHttpResponse('FetchPaymentMethodsFailure.txt');
+        $this->setMockHttpResponse('XmlFetchIssuersFailure.txt');
 
         $response = $this->request->send();
 
@@ -60,16 +63,21 @@ class FetchPaymentMethodsRequestTest extends TestCase
         $this->assertEquals($xml, $dom->saveXML());
     }
 
-    public function paymentMethodsProvider()
+    public function issuersProvider()
     {
         return array(
             array(
                 array(
-                    'VISA' => 'Visa CreditCards',
-                    'WALLET' => 'MultiSafepay',
-                    'IDEAL' => 'iDEAL',
-                    'BANKTRANS' => 'Bank Transfer',
-                    'MASTERCARD' => 'MasterCard',
+                    '0031' => 'ABN AMRO',
+                    '0751' => 'SNS Bank',
+                    '0721' => 'ING',
+                    '0021' => 'Rabobank',
+                    '0091' => 'Friesland Bank',
+                    '0761' => 'ASN Bank',
+                    '0771' => 'SNS Regio Bank',
+                    '0511' => 'Triodos Bank',
+                    '0161' => 'Van Lanschot Bankiers',
+                    '0801' => 'Knab',
                 ),
             ),
         );
@@ -79,16 +87,13 @@ class FetchPaymentMethodsRequestTest extends TestCase
     {
         $xml = <<<EOF
 <?xml version="1.0" encoding="UTF-8"?>
-<gateways ua="Omnipay">
+<idealissuers ua="Omnipay">
   <merchant>
     <account>111111</account>
     <site_id>222222</site_id>
     <site_secure_code>333333</site_secure_code>
   </merchant>
-  <customer>
-    <country>NL</country>
-  </customer>
-</gateways>
+</idealissuers>
 
 EOF;
 

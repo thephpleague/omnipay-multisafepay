@@ -1,11 +1,17 @@
 <?php
+/**
+ * MultiSafepay XML Api Fetch Issuers Request.
+ */
 
 namespace Omnipay\MultiSafepay\Message;
 
 use SimpleXMLElement;
 
 /**
- * @method \Omnipay\MultiSafepay\Message\FetchIssuersResponse send()
+ * MultiSafepay XML Api Fetch Issuers Request.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
  */
 class FetchIssuersRequest extends AbstractRequest
 {
@@ -36,6 +42,11 @@ class FetchIssuersRequest extends AbstractRequest
             $data->asXML()
         )->send();
 
-        return $this->response = new FetchIssuersResponse($this, $httpResponse->xml());
+        $this->response = new FetchIssuersResponse(
+            $this,
+            $httpResponse->xml()
+        );
+
+        return $this->response;
     }
 }

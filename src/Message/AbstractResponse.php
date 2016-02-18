@@ -1,11 +1,17 @@
 <?php
+/**
+ * MultiSafepay Abstract XML Api Response.
+ */
 
 namespace Omnipay\MultiSafepay\Message;
 
 use Omnipay\Common\Message\AbstractResponse as BaseAbstractResponse;
 
 /**
- * @method mixed|\SimpleXMLElement getData()
+ * MultiSafepay Abstract XML Api Response.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
  */
 abstract class AbstractResponse extends BaseAbstractResponse
 {

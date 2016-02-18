@@ -1,7 +1,16 @@
 <?php
+/**
+ * MultiSafepay XML Api Fetch Payment Methods Response.
+ */
 
 namespace Omnipay\MultiSafepay\Message;
 
+/**
+ * MultiSafepat XML Api Fetch Payment Methods Response.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
+ */
 class FetchPaymentMethodsResponse extends AbstractResponse
 {
     /**

@@ -1,11 +1,17 @@
 <?php
+/**
+ * MultiSafepay Xml Gateway Test.
+ */
 
 namespace Omnipay\MultiSafepay;
 
 use Omnipay\Common\CreditCard;
 use Omnipay\Tests\GatewayTestCase;
 
-class GatewayTest extends GatewayTestCase
+/**
+ * MultiSafepay Xml Gateway Test.
+ */
+class XmlGatewayTest extends GatewayTestCase
 {
     /**
      * @var Gateway
@@ -17,6 +23,9 @@ class GatewayTest extends GatewayTestCase
      */
     protected $options;
 
+    /**
+     * @{inheritdoc}
+     */
     protected function setUp()
     {
         parent::setUp();

@@ -4,7 +4,7 @@ namespace Omnipay\MultiSafepay\Message;
 
 use Omnipay\Tests\TestCase;
 
-class CompletePurchaseRequestTest extends TestCase
+class XmlCompletePurchaseRequestTest extends TestCase
 {
     /**
      * @var CompletePurchaseRequest
@@ -13,7 +13,11 @@ class CompletePurchaseRequestTest extends TestCase
 
     protected function setUp()
     {
-        $this->request = new CompletePurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->request = new CompletePurchaseRequest(
+            $this->getHttpClient(),
+            $this->getHttpRequest()
+        );
+
         $this->request->initialize(array(
             'accountId' => '111111',
             'siteId' => '222222',
@@ -49,7 +53,7 @@ class CompletePurchaseRequestTest extends TestCase
 
     public function testSendSuccess()
     {
-        $this->setMockHttpResponse('CompletePurchaseSuccess.txt');
+        $this->setMockHttpResponse('XmlCompletePurchaseSuccess.txt');
 
         $response = $this->request->send();
 
@@ -59,7 +63,7 @@ class CompletePurchaseRequestTest extends TestCase
 
     public function testSendFailure()
     {
-        $this->setMockHttpResponse('CompletePurchaseFailure.txt');
+        $this->setMockHttpResponse('XmlCompletePurchaseFailure.txt');
 
         $response = $this->request->send();
 

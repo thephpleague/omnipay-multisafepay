@@ -5,7 +5,7 @@ namespace Omnipay\MultiSafepay\Message;
 use Omnipay\Tests\TestCase;
 use ReflectionMethod;
 
-class PurchaseRequestTest extends TestCase
+class XmlPurchaseRequestTest extends TestCase
 {
     /**
      * @var PurchaseRequest
@@ -14,7 +14,11 @@ class PurchaseRequestTest extends TestCase
 
     protected function setUp()
     {
-        $this->request = new PurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
+        $this->request = new PurchaseRequest(
+            $this->getHttpClient(),
+            $this->getHttpRequest()
+        );
+
         $this->request->initialize(array(
             'accountId' => '111111',
             'siteId' => '222222',
@@ -54,19 +58,23 @@ class PurchaseRequestTest extends TestCase
 
     public function testSendSuccess()
     {
-        $this->setMockHttpResponse('PurchaseSuccess.txt');
+        $this->setMockHttpResponse('XmlPurchaseSuccess.txt');
 
         $response = $this->request->send();
 
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isRedirect());
-        $this->assertEquals('https://testpay.multisafepay.com/pay/?transaction=1373536347Hz4sFtg7WgMulO5q123456&lang=', $response->getRedirectUrl());
+        $this->assertEquals(
+            'https://testpay.multisafepay.com/pay/?transaction=1373536347Hz4sFtg7WgMulO5q123456&lang=',
+            $response->getRedirectUrl()
+        );
+
         $this->assertEquals('123456', $response->getTransactionReference());
     }
 
     public function testSendFailure()
     {
-        $this->setMockHttpResponse('PurchaseFailure.txt');
+        $this->setMockHttpResponse('XmlPurchaseFailure.txt');
 
         $response = $this->request->send();
 

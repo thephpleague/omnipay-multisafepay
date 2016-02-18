@@ -1,4 +1,7 @@
 <?php
+/**
+ * MultiSafepay XML Api Purchase Request.
+ */
 
 namespace Omnipay\MultiSafepay\Message;
 
@@ -6,85 +9,176 @@ use Omnipay\Common\CreditCard;
 use SimpleXMLElement;
 
 /**
- * @method \Omnipay\MultiSafepay\Message\PurchaseResponse send()
+ * MultiSafepay XML Api Purchase Request.
+ *
+ * @deprecated This API is deprecated and will be removed in
+ * an upcoming version of this package. Please switch to the Rest API.
  */
 class PurchaseRequest extends AbstractRequest
 {
+    /**
+     * Get the language.
+     *
+     * @return mixed
+     */
     public function getLanguage()
     {
         return $this->getParameter('language');
     }
 
+    /**
+     * Set the language.
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setLanguage($value)
     {
         return $this->setParameter('language', $value);
     }
 
+    /**
+     * Get the gateway.
+     *
+     * @return mixed
+     */
     public function getGateway()
     {
         return $this->getParameter('gateway');
     }
 
+    /**
+     * Set the gateway.
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setGateway($value)
     {
         return $this->setParameter('gateway', $value);
     }
 
+    /**
+     * Get Issuer.
+     *
+     * @return mixed
+     */
     public function getIssuer()
     {
         return $this->getParameter('issuer');
     }
 
+    /**
+     * Set issuer.
+     *
+     * @param string $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setIssuer($value)
     {
         return $this->setParameter('issuer', $value);
     }
 
+    /**
+     * Get the Google analytics code.
+     *
+     * @return mixed
+     */
     public function getGoogleAnalyticsCode()
     {
         return $this->getParameter('googleAnalyticsCode');
     }
 
+    /**
+     * Set the Google analytics code.
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setGoogleAnalyticsCode($value)
     {
         return $this->setParameter('googleAnalyticsCode', $value);
     }
 
+    /**
+     * Get the value of "extradata1"
+     *
+     * @return mixed
+     */
     public function getExtraData1()
     {
         return $this->getParameter('extraData1');
     }
 
+    /**
+     * Set the value of "extradata1"
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setExtraData1($value)
     {
         return $this->setParameter('extraData1', $value);
     }
 
+    /**
+     * Get the value of "extradata2"
+     *
+     * @return mixed
+     */
     public function getExtraData2()
     {
         return $this->getParameter('extraData2');
     }
 
+    /**
+     * Set the value of "extraData2
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setExtraData2($value)
     {
         return $this->setParameter('extraData2', $value);
     }
 
+    /**
+     * Get the value of "extraData3"
+     *
+     * @return mixed
+     */
     public function getExtraData3()
     {
         return $this->getParameter('extraData3');
     }
 
+    /**
+     * Set the value of "extraData3"
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setExtraData3($value)
     {
         return $this->setParameter('extraData3', $value);
     }
 
+    /**
+     * Get the items.
+     *
+     * @return mixed
+     */
     public function getItems()
     {
         return $this->getParameter('items');
     }
 
+    /**
+     * Set the items.
+     *
+     * @param array|\Omnipay\Common\ItemBag $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
     public function setItems($value)
     {
         return $this->setParameter('items', $value);
@@ -170,10 +264,17 @@ class PurchaseRequest extends AbstractRequest
             $data->asXML()
         )->send();
 
-        return $this->response = new PurchaseResponse($this, $httpResponse->xml());
+        $this->response =  new PurchaseResponse(
+            $this,
+            $httpResponse->xml()
+        );
+
+        return $this->response;
     }
 
     /**
+     * Generate signature.
+     *
      * @return string
      */
     protected function generateSignature()
