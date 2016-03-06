@@ -1,5 +1,5 @@
 {
-    "name": "omnipay/multisafepay",
+    "name": "pawnerd/omnipaymsp",
     "type": "library",
     "description": "MultiSafepay driver for the Omnipay payment processing library",
     "keywords": [
