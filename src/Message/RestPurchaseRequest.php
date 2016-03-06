@@ -394,7 +394,7 @@ class RestPurchaseRequest extends RestAbstractRequest
             'cancel_url'   => $this->getCancelUrl(),
             'close_window' => $this->getCloseWindow(),
             'notify_url'   => $this->getNotifyUrl(),
-            'return_url'   => $this->getReturnUrl(),
+            'redirect_url'   => $this->getReturnUrl(),
         );
 
         return array_filter($data);
