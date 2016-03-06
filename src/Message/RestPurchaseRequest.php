@@ -1,4 +1,5 @@
 <?php
+
 /**
  * MultiSafepay Rest Api Purchase Request.
  */
@@ -85,8 +86,8 @@ namespace Omnipay\MultiSafepay\Message;
  *    var_dump($response->getData());
  * </code>
  */
-class RestPurchaseRequest extends RestAbstractRequest
-{
+class RestPurchaseRequest extends RestAbstractRequest {
+
     /**
      * Get payment type.
      *
@@ -94,8 +95,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return string
      */
-    public function getType()
-    {
+    public function getType() {
         return $this->getParameter('type');
     }
 
@@ -108,8 +108,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setType($value)
-    {
+    public function setType($value) {
         return $this->setParameter('type', $value);
     }
 
@@ -121,8 +120,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return int|null
      */
-    public function getRecurringId()
-    {
+    public function getRecurringId() {
         return $this->getParameter('recurring_id');
     }
 
@@ -135,9 +133,32 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setRecurringId($value)
-    {
+    public function setRecurringId($value) {
         return $this->setParameter('recurring_id', $value);
+    }
+
+    /**
+     * Set Order Id
+     *
+     * A previously stored identifier referring to a
+     * order to be charged again.
+     *
+     * @param $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function setOrderId($value) {
+        return $this->setParameter('order_id', $value);
+    }
+
+    /**
+     * Get value of order_id.
+     *
+     * A variable to store the order_id.
+     *
+     * @return string|null
+     */
+    public function getOrderId() {
+        return $this->getParameter('order_id');
     }
 
     /**
@@ -148,8 +169,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return mixed
      */
-    public function getGateway()
-    {
+    public function getGateway() {
         return $this->getParameter('gateway');
     }
 
@@ -162,8 +182,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setGateway($value)
-    {
+    public function setGateway($value) {
         return $this->setParameter('gateway', $value);
     }
 
@@ -174,8 +193,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return string|null
      */
-    public function getVar1()
-    {
+    public function getVar1() {
         return $this->getParameter('var1');
     }
 
@@ -187,8 +205,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setVar1($value)
-    {
+    public function setVar1($value) {
         return $this->setParameter('var1', $value);
     }
 
@@ -199,8 +216,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return string|null
      */
-    public function getVar2()
-    {
+    public function getVar2() {
         return $this->getParameter('var2');
     }
 
@@ -212,8 +228,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setVar2($value)
-    {
+    public function setVar2($value) {
         return $this->setParameter('var2', $value);
     }
 
@@ -224,8 +239,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return string|null
      */
-    public function getVar3()
-    {
+    public function getVar3() {
         return $this->getParameter('var3');
     }
 
@@ -237,8 +251,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setVar3($value)
-    {
+    public function setVar3($value) {
         return $this->setParameter('var3', $value);
     }
 
@@ -251,8 +264,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return boolean|null
      */
-    public function getManual()
-    {
+    public function getManual() {
         return $this->getParameter('manual');
     }
 
@@ -266,8 +278,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setManual($value)
-    {
+    public function setManual($value) {
         return $this->setParameter('manual', $value);
     }
 
@@ -279,8 +290,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return int|null
      */
-    public function getDaysActive()
-    {
+    public function getDaysActive() {
         return $this->getParameter('days_active');
     }
 
@@ -293,8 +303,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setDaysActive($value)
-    {
+    public function setDaysActive($value) {
         return $this->setParameter('days_active', $value);
     }
 
@@ -307,8 +316,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return boolean|null
      */
-    public function getCloseWindow()
-    {
+    public function getCloseWindow() {
         return $this->getParameter('close_window');
     }
 
@@ -322,8 +330,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setCloseWindow($value)
-    {
+    public function setCloseWindow($value) {
         return $this->setParameter('close_window', $value);
     }
 
@@ -335,8 +342,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return boolean
      */
-    public function getSendMail()
-    {
+    public function getSendMail() {
         return $this->getParameter('disable_send_mail');
     }
 
@@ -349,8 +355,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setSendMail($value)
-    {
+    public function setSendMail($value) {
         return $this->setParameter('disable_send_mail', $value);
     }
 
@@ -363,8 +368,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return string|null
      */
-    public function getGoogleAnalyticsCode()
-    {
+    public function getGoogleAnalyticsCode() {
         return $this->getParameter('google_analytics');
     }
 
@@ -378,8 +382,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param $value
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function setGoogleAnalyticsCode($value)
-    {
+    public function setGoogleAnalyticsCode($value) {
         return $this->setParameter('google_analytics', $value);
     }
 
@@ -388,13 +391,12 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return array
      */
-    protected function getPaymentData()
-    {
+    protected function getPaymentData() {
         $data = array(
-            'cancel_url'   => $this->getCancelUrl(),
+            'cancel_url' => $this->getCancelUrl(),
             'close_window' => $this->getCloseWindow(),
-            'notify_url'   => $this->getNotifyUrl(),
-            'redirect_url'   => $this->getReturnUrl(),
+            'notify_url' => $this->getNotifyUrl(),
+            'redirect_url' => $this->getReturnUrl(),
         );
 
         return array_filter($data);
@@ -408,11 +410,10 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return array
      */
-    public function getCustomerData()
-    {
+    public function getCustomerData() {
         $data = array(
             'disable_send_mail' => $this->getSendMail(),
-            'locale'            => $this->getLocale(),
+            'locale' => $this->getLocale(),
         );
 
         if (is_null($this->getCard())) {
@@ -420,21 +421,21 @@ class RestPurchaseRequest extends RestAbstractRequest
         }
 
         $cardData = array(
-            'address_1'         => $this->getCard()->getAddress1(),
-            'address_2'         => $this->getCard()->getAddress2(),
-            'city'              => $this->getCard()->getCity(),
-            'country'           => $this->getCard()->getCountry(),
-            'email'             => $this->getCard()->getEmail(),
-            'first_name'        => $this->getCard()->getFirstName(),
-            'house_number'      => $this->getCard()->getNumber(),
-            'last_name'         => $this->getCard()->getLastName(),
-            'phone'             => $this->getCard()->getPhone(),
-            'state'             => $this->getCard()->getState(),
-            'zip_code'          => $this->getCard()->getPostcode(),
+            'address_1' => $this->getCard()->getAddress1(),
+            'address_2' => $this->getCard()->getAddress2(),
+            'city' => $this->getCard()->getCity(),
+            'country' => $this->getCard()->getCountry(),
+            'email' => $this->getCard()->getEmail(),
+            'first_name' => $this->getCard()->getFirstName(),
+            'house_number' => $this->getCard()->getNumber(),
+            'last_name' => $this->getCard()->getLastName(),
+            'phone' => $this->getCard()->getPhone(),
+            'state' => $this->getCard()->getState(),
+            'zip_code' => $this->getCard()->getPostcode(),
         );
 
         return array_filter(
-            array_merge($data, $cardData)
+                array_merge($data, $cardData)
         );
     }
 
@@ -443,8 +444,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return array
      */
-    protected function getGatewayData()
-    {
+    protected function getGatewayData() {
         $data = array(
             'issuer_id' => $this->getIssuer(),
         );
@@ -459,16 +459,11 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @return array
      * @throws \Omnipay\Common\Exception\InvalidRequestException
      */
-    public function getData()
-    {
+    public function getData() {
         parent::getData();
 
         $this->validate(
-            'amount',
-            'currency',
-            'description',
-            'transactionId',
-            'type'
+                'amount', 'currency', 'description', 'transactionId', 'type'
         );
 
         // Direct order.
@@ -479,44 +474,45 @@ class RestPurchaseRequest extends RestAbstractRequest
         // When the gateway is set to IDEAL,
         // the issuer parameter is required.
         if (
-            $this->getType() == 'direct' &&
-            $this->getGateway() == 'IDEAL'
+                $this->getType() == 'direct' &&
+                $this->getGateway() == 'IDEAL'
         ) {
             $this->validate('issuer');
         }
 
         $data = array(
-            'amount'           => $this->getAmountInteger(),
-            'currency'         => $this->getCurrency(),
-            'days_active'      => $this->getDaysActive(),
-            'description'      => $this->getDescription(),
-            'gateway'          => $this->getGateway(),
+            'amount' => $this->getAmountInteger(),
+            'currency' => $this->getCurrency(),
+            'days_active' => $this->getDaysActive(),
+            'description' => $this->getDescription(),
+            'gateway' => $this->getGateway(),
             'google_analytics' => $this->getGoogleAnalyticsCode(),
-            'items'            => $this->getItems(),
-            'manual'           => $this->getManual(),
-            'order_id'         => $this->getTransactionId(),
-            'recurring_id'     => $this->getRecurringId(),
-            'type'             => $this->getType(),
-            'var1'             => $this->getVar1(),
-            'var2'             => $this->getVar2(),
-            'var3'             => $this->getVar3(),
+            'items' => $this->getItems(),
+            'manual' => $this->getManual(),
+            'order_id' => $this->getOrderId(),
+            'transaction_id' => $this->getTransactionId(),
+            'recurring_id' => $this->getRecurringId(),
+            'type' => $this->getType(),
+            'var1' => $this->getVar1(),
+            'var2' => $this->getVar2(),
+            'var3' => $this->getVar3(),
         );
 
         $paymentData = $this->getPaymentData();
 
-        if (! empty($paymentData)) {
+        if (!empty($paymentData)) {
             $data['payment_options'] = $paymentData;
         }
 
         $customerData = $this->getCustomerData();
 
-        if (! empty($customerData)) {
+        if (!empty($customerData)) {
             $data['customer'] = $customerData;
         }
 
         $gatewayData = $this->getGatewayData();
 
-        if (! empty($gatewayData)) {
+        if (!empty($gatewayData)) {
             $data['gateway_info'] = $gatewayData;
         }
 
@@ -529,15 +525,14 @@ class RestPurchaseRequest extends RestAbstractRequest
      * @param mixed $data
      * @return RestPurchaseResponse
      */
-    public function sendData($data)
-    {
+    public function sendData($data) {
         $httpResponse = $this->sendRequest('POST', '/orders', null, $data);
 
         $this->response = new RestPurchaseResponse(
-            $this,
-            $httpResponse->json()
+                $this, $httpResponse->json()
         );
 
         return $this->response;
     }
+
 }
