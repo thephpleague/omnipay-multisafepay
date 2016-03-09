@@ -44,11 +44,11 @@ class RestFetchTransactionResponse extends RestAbstractResponse
     }
 
     /**
-     * Is the payment canceled?
+     * Is the payment cancelled?
      *
      * @return boolean
      */
-    public function isCanceled()
+    public function isCancelled()
     {
         return $this->getPaymentStatus() == 'canceled';
     }
