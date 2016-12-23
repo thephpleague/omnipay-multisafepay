@@ -426,7 +426,7 @@ class RestPurchaseRequest extends RestAbstractRequest
             'country'           => $this->getCard()->getCountry(),
             'email'             => $this->getCard()->getEmail(),
             'first_name'        => $this->getCard()->getFirstName(),
-            'house_number'      => $this->getCard()->getNumber(),
+            'house_number'      => $this->getVar1(),
             'last_name'         => $this->getCard()->getLastName(),
             'phone'             => $this->getCard()->getPhone(),
             'state'             => $this->getCard()->getState(),
