@@ -87,7 +87,21 @@ use Omnipay\Common\Message\RedirectResponseInterface;
  * </code>
  */
 class RestPurchaseResponse extends RestAbstractResponse implements RedirectResponseInterface
-{
+{ 
+    /**
+     * Is the response successful?
+     *
+     * @return boolean
+     */
+    public function isSuccessful()
+    {
+        if ($this->isRedirect()) {
+            return false;
+        }
+        
+        return parent::isSuccessful();
+    }
+    
     /**
      * {@inheritdoc}
      */
