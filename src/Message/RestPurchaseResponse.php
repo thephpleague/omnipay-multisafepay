@@ -2,6 +2,7 @@
 /**
  * MultiSafepay Rest Api Purchase Response.
  */
+
 namespace Omnipay\MultiSafepay\Message;
 
 use Omnipay\Common\Message\RedirectResponseInterface;
@@ -89,6 +90,20 @@ use Omnipay\Common\Message\RedirectResponseInterface;
 class RestPurchaseResponse extends RestAbstractResponse implements RedirectResponseInterface
 {
     /**
+     * Is the response successful?
+     *
+     * @return bool
+     */
+    public function isSuccessful()
+    {
+        if ($this->isRedirect()) {
+            return false;
+        }
+
+        return parent::isSuccessful();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function isRedirect()
@@ -101,8 +116,8 @@ class RestPurchaseResponse extends RestAbstractResponse implements RedirectRespo
      */
     public function getRedirectUrl()
     {
-        if (! $this->isRedirect()) {
-            return null;
+        if (!$this->isRedirect()) {
+            return;
         }
 
         return $this->data['data']['payment_url'];
@@ -121,6 +136,6 @@ class RestPurchaseResponse extends RestAbstractResponse implements RedirectRespo
      */
     public function getRedirectData()
     {
-        return null;
+        return;
     }
 }
