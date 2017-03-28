@@ -72,7 +72,7 @@ class RestRefundRequest extends RestAbstractRequest
 
         $this->response = new RestRefundResponse(
             $this,
-            $httpResponse
+            $httpResponse->json()
         );
 
         return $this->response;
