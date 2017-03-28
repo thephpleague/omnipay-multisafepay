@@ -67,6 +67,7 @@ class RestRefundRequest extends RestAbstractRequest
         $httpResponse = $this->sendRequest(
             'POST',
             '/orders/' . $data['id'] . '/refunds',
+            null,
             $data
         );
 
