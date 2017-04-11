@@ -390,7 +390,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      */
     public function setItemsHtml ($itemsHtml)
     {
-        $this->setParameter('itemsHtml', htmlspecialchars($itemsHtml));
+        $this->setParameter('itemsHtml', $itemsHtml);
     }
 
     /** 
