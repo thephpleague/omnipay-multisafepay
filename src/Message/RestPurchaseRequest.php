@@ -388,7 +388,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return  string
      */
-    public function setItemsHtml ($itemsHtml)
+    public function setItemsHtml($itemsHtml)
     {
         $this->setParameter('itemsHtml', $itemsHtml);
     }
@@ -398,7 +398,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      *
      * @return  string
      */
-    public function getItemsHtml ()
+    public function getItemsHtml()
     {
         return $this->getParameter('itemsHtml');
     }
