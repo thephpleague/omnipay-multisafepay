@@ -479,16 +479,16 @@ class RestPurchaseRequest extends RestAbstractRequest
      */
     protected function getItemBagData()
     {
-        $items = [];
+        $items = array();
         $itemBag = $this->getItems();
         if (! empty($itemBag)) {
             foreach ($itemBag->all() as $item) {
-                $items[] = [
+                $items[] = array(
                     'name' => $item->getName(),
                     'description' => $item->getDescription(),
                     'quantity' => $item->getQuantity(),
                     'unit_price' => $item->getPrice(),
-                ];
+                );
             }
         }
 
