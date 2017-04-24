@@ -337,7 +337,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      */
     public function getSendMail()
     {
-        return $this->getParameter('disable_send_mail');
+        return $this->getParameter('disable_send_email');
     }
 
     /**
@@ -351,7 +351,7 @@ class RestPurchaseRequest extends RestAbstractRequest
      */
     public function setSendMail($value)
     {
-        return $this->setParameter('disable_send_mail', $value);
+        return $this->setParameter('disable_send_email', $value);
     }
 
     /**
@@ -411,7 +411,7 @@ class RestPurchaseRequest extends RestAbstractRequest
     public function getCustomerData()
     {
         $data = array(
-            'disable_send_mail' => $this->getSendMail(),
+            'disable_send_email' => $this->getSendMail(),
             'locale'            => $this->getLocale(),
         );
 
