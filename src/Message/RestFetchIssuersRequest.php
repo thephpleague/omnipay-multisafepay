@@ -58,7 +58,7 @@ class RestFetchIssuersRequest extends RestAbstractRequest
 
         $this->response = new RestFetchIssuersResponse(
             $this,
-            $httpResponse->json()
+            json_decode($httpResponse->getBody()->getContents(), true)
         );
 
         return $this->response;

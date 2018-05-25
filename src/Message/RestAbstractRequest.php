@@ -6,7 +6,7 @@
 namespace Omnipay\MultiSafepay\Message;
 
 use Omnipay\Common\Message\AbstractRequest;
-use Guzzle\Common\Event;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * MultiSafepay Rest API Abstract Request class.
@@ -147,33 +147,16 @@ abstract class RestAbstractRequest extends AbstractRequest
      *
      * @param $method
      * @param $endpoint
-     * @param null $query
      * @param null $data
-     * @return \Guzzle\Http\Message\Response
+     * @return ResponseInterface
      */
-    protected function sendRequest($method, $endpoint, $query = null, $data = null)
+    protected function sendRequest($method, $endpoint, $data = null)
     {
-        $this->httpClient->getEventDispatcher()->addListener('request.error', function (Event $event) {
-            $response = $event['response'];
-            if ($response->isError()) {
-                $event->stopPropagation();
-            }
-        });
-
-        $httpRequest = $this->httpClient->createRequest(
+        return $this->httpClient->request(
             $method,
             $this->getEndpoint() . $endpoint,
             $this->getHeaders(),
             $data
         );
-
-        // Add query parameters
-        if (is_array($query) && ! empty($query)) {
-            foreach ($query as $itemKey => $itemValue) {
-                $httpRequest->getQuery()->add($itemKey, $itemValue);
-            }
-        }
-
-        return $httpRequest->send();
     }
 }

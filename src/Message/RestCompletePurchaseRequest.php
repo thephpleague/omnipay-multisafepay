@@ -50,7 +50,7 @@ class RestCompletePurchaseRequest extends RestFetchTransactionRequest
 
         $this->response = new RestCompletePurchaseResponse(
             $this,
-            $httpResponse->json()
+            json_decode($httpResponse->getBody()->getContents(), true)
         );
 
         return $this->response;

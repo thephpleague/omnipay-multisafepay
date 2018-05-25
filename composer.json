@@ -27,14 +27,15 @@
         "psr-4": { "Omnipay\\MultiSafepay\\" : "src/" }
     },
     "require": {
-        "omnipay/common": "~2.0"
+        "omnipay/common": "^3"
     },
     "require-dev": {
-        "omnipay/tests": "~2.0"
+        "omnipay/tests": "^3",
+        "squizlabs/php_codesniffer": "^3"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-master": "3.0.x-dev"
         }
     }
 }
