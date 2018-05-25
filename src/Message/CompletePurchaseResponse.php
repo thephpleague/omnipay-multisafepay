@@ -49,7 +49,6 @@ class CompletePurchaseResponse extends AbstractResponse
     public function isUncleared()
     {
         return $this->getPaymentStatus() === 'uncleared';
-
     }
 
     /**

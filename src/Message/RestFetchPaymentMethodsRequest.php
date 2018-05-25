@@ -72,11 +72,11 @@ class RestFetchPaymentMethodsRequest extends RestAbstractRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->sendRequest('GET', '/gateways', $data);
+        $httpResponse = $this->sendRequest('GET', '/gateways', json_encode($data));
 
         $this->response = new RestFetchPaymentMethodsResponse(
             $this,
-            $httpResponse->json()
+            json_decode($httpResponse->getBody()->getContents(), true)
         );
 
         return $this->response;

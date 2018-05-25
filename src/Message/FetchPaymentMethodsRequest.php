@@ -59,15 +59,16 @@ class FetchPaymentMethodsRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->post(
+        $httpResponse = $this->httpClient->request(
+            'POST',
             $this->getEndpoint(),
             $this->getHeaders(),
             $data->asXML()
-        )->send();
+        );
 
         $this->response = new FetchPaymentMethodsResponse(
             $this,
-            $httpResponse->xml()
+            simplexml_load_string($httpResponse->getBody()->getContents())
         );
 
         return $this->response;
