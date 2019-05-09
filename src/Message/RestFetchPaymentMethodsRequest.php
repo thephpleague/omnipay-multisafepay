@@ -22,6 +22,7 @@ namespace Omnipay\MultiSafepay\Message;
  * </code>
  *
  * @link https://www.multisafepay.com/documentation/doc/API-Reference
+ * @link https://docs.multisafepay.com/api/#gateways
  */
 class RestFetchPaymentMethodsRequest extends RestAbstractRequest
 {
@@ -45,7 +46,27 @@ class RestFetchPaymentMethodsRequest extends RestAbstractRequest
     {
         return $this->setParameter('country', $value);
     }
+    
+    
+    /**
+     * Set include (Specify comma delimited additional payment method types. Options: coupons)
+     * @param string $value
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function setInclude($value)
+    {
+        return $this->setParameter('include', $value);
+    }
 
+    /**
+     * Get include
+     * @return string|null
+     */
+    public function getInclude()
+    {
+        return $this->getParameter('include');
+    }
+    
     /**
      * Get the required data for the API request.
      *
@@ -59,6 +80,7 @@ class RestFetchPaymentMethodsRequest extends RestAbstractRequest
             'amount' => $this->getAmountInteger(),
             'country' => $this->getCountry(),
             'currency' => $this->getCurrency(),
+            'include' => $this->getInclude()
         );
 
         return array_filter($data);
@@ -72,7 +94,7 @@ class RestFetchPaymentMethodsRequest extends RestAbstractRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->sendRequest('GET', '/gateways', json_encode($data));
+        $httpResponse = $this->sendRequest('GET', '/gateways?' . http_build_query($data));
 
         $this->response = new RestFetchPaymentMethodsResponse(
             $this,
