@@ -2,6 +2,7 @@
 
 namespace Omnipay\MultiSafepay\Message;
 
+use Omnipay\Common\PaymentMethod;
 use Omnipay\Tests\TestCase;
 
 class XmlFetchPaymentMethodsRequestTest extends TestCase
@@ -66,17 +67,17 @@ class XmlFetchPaymentMethodsRequestTest extends TestCase
 
     public function paymentMethodsProvider()
     {
-        return array(
-            array(
-                array(
-                    'VISA' => 'Visa CreditCards',
-                    'WALLET' => 'MultiSafepay',
-                    'IDEAL' => 'iDEAL',
-                    'BANKTRANS' => 'Bank Transfer',
-                    'MASTERCARD' => 'MasterCard',
-                ),
-            ),
-        );
+        return [
+            [
+                [
+                    new PaymentMethod('VISA', 'Visa CreditCards'),
+                    new PaymentMethod('WALLET', 'MultiSafepay'),
+                    new PaymentMethod('IDEAL', 'iDEAL'),
+                    new PaymentMethod('BANKTRANS', 'Bank Transfer'),
+                    new PaymentMethod('MASTERCARD', 'MasterCard'),
+                ],
+            ],
+        ];
     }
 
     public function dataProvider()
