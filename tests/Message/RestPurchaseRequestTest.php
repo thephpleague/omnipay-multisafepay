@@ -27,6 +27,7 @@ class RestPurchaseRequestTest extends TestCase
                 'return_url' => 'http://localhost/return',
                 'close_window' => false,
                 'days_active' => 3,
+                'seconds_active' => 100,
                 'send_mail' => true,
                 'gateway' => 'IDEAL',
                 'google_analytics_code' => '123456789',
@@ -84,6 +85,7 @@ class RestPurchaseRequestTest extends TestCase
         $this->assertEquals('TEST-TRANS-1', $this->request->getTransactionId());
         $this->assertEquals(10.00, $this->request->getAmount());
         $this->assertEquals(3, $this->request->getDaysActive());
+        $this->assertEquals(100, $this->request->getSecondsActive());
         $this->assertFalse($this->request->getCloseWindow());
         $this->assertFalse($this->request->getManual());
         $this->assertTrue($this->request->getSendMail());
