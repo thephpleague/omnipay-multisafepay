@@ -153,7 +153,7 @@ abstract class RestAbstractRequest extends AbstractRequest
     protected function sendRequest($method, $endpoint, $data = null)
     {
         return $this->httpClient->request(
-            $method,
+            strtoupper($method),
             $this->getEndpoint() . $endpoint,
             $this->getHeaders(),
             $data
