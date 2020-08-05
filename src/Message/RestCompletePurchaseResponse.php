@@ -27,4 +27,12 @@ class RestCompletePurchaseResponse extends RestFetchTransactionResponse
     {
         return $this->getPaymentStatus() == 'completed';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isPending()
+    {
+        return parent::isInitialized();
+    }
 }
